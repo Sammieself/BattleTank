@@ -1,4 +1,5 @@
 // Hello my doggies.
+#include "BattleTank.h"
 #include "TankAIController.h"
 
 void ATankAIController::BeginPlay()
