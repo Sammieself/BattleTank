@@ -1,6 +1,6 @@
 // Hello my doggies.
-#include "BattleTank.h"
 #include "Tank.h"
+#include "BattleTank.h"
 
 // Sets default values
 ATank::ATank()
@@ -25,7 +25,7 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 }
 
-void ATank::SetBarrelReference(UStaticMeshComponent* BarrelToSet)
+void ATank::SetBarrelReference(UTankBarrel* BarrelToSet)
 {
 	TankAimingComponenet->SetBarrelReference(BarrelToSet);
 }
