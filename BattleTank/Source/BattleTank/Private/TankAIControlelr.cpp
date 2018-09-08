@@ -1,4 +1,5 @@
 // Hello my doggies.
+#include "Tank.h"
 #include "BattleTank.h"
 #include "TankAIController.h"
 

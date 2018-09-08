@@ -4,6 +4,8 @@
 #include "TankAimingComponent.h"
 #include "Tank.h"
 
+//class ATank;
+
 void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();

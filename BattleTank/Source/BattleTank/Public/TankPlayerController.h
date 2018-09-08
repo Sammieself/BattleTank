@@ -1,9 +1,12 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 #pragma once
 #include "CoreMinimal.h"
-#include "Tank.h"
+//#include "Tank.h"
 #include "GameFramework/PlayerController.h"
 #include "TankPlayerController.generated.h" // Must be the last include
+
+class ATank;
+class UTankTankAimingComponent;
 
 UCLASS()
 class BATTLETANK_API ATankPlayerController : public APlayerController
@@ -16,7 +19,7 @@ private:
 	UPROPERTY(EditAnywhere)
 		float CrosshairYLocation = 0.333f;
 	UPROPERTY(EditAnywhere)
-		float LineTraceRange = 100000.0f;
+		float LineTraceRange = 1000000.0f;
 
 	ATank* GetControlledTank() const;
 	virtual void BeginPlay() override;
