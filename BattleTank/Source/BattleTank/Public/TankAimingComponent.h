@@ -5,6 +5,7 @@
 #include "TankAimingComponent.generated.h"
 
 // Forward Declaration
+class UTankTurret;
 class UTankBarrel;
 
 // Holds barrel's properties
@@ -17,6 +18,7 @@ public:
 	// Sets default values for this component's properties
 	UTankAimingComponent();
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+	void SetTurretReference(UTankTurret* TurretToSet);
 	void SetBarrelReference(UTankBarrel* BarrelToSet);
 	void AimAt(FVector HitLocation, float LaunchSpeed);
 
@@ -25,6 +27,7 @@ protected:
 	virtual void BeginPlay() override;
 
 private:	
+	UTankTurret* Turret = nullptr;
 	UTankBarrel* Barrel = nullptr;
 	void MoveBarrelTowards(FVector AimDirection);
 };

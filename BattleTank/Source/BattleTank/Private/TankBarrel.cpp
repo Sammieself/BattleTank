@@ -1,6 +1,6 @@
 // Hello my doggies.
-#include "BattleTank.h"
 #include "TankBarrel.h"
+#include "BattleTank.h"
 
 void UTankBarrel::Elevate(float RelativeSpeed)
 {
