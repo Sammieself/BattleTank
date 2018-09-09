@@ -3,35 +3,34 @@
 #include "BattleTank.h"
 
 // Sets default values
-ATank::ATank()
-{
+ATank::ATank() {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 	TankAimingComponenet = CreateDefaultSubobject<UTankAimingComponent>(FName("AimingComponent"));
 }
 // Called when the game starts or when spawned
-void ATank::BeginPlay()
-{
+void ATank::BeginPlay() {
 	Super::BeginPlay();
 }
 
 // Called to bind functionality to input
-void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
-{
+void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 }
 
-void ATank::SetTurretReference(UTankTurret* TurretToSet)
-{
+void ATank::SetTurretReference(UTankTurret* TurretToSet) {
 	TankAimingComponenet->SetTurretReference(TurretToSet);
 }
 
-void ATank::SetBarrelReference(UTankBarrel* BarrelToSet)
-{
+void ATank::SetBarrelReference(UTankBarrel* BarrelToSet) {
 	TankAimingComponenet->SetBarrelReference(BarrelToSet);
 }
 
-void ATank::AimAt(FVector HitLocation)
-{
+void ATank::AimAt(FVector HitLocation) {
 	TankAimingComponenet->AimAt(HitLocation, LaunchSpeed);
+}
+
+void ATank::Fire() {
+	auto Time = GetWorld()->GetTimeSeconds();
+	UE_LOG(LogTemp, Warning, TEXT("%f: Fire!"), Time);
 }

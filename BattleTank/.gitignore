@@ -78,3 +78,5 @@ DerivedDataCache/*
 
 # Ryu
 Content/StarterContent/*
+.vscode
+*.code-workspace
