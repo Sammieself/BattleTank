@@ -5,9 +5,8 @@
 #include "TankMovementComponent.generated.h"
 
 class UTankTrack;
-
 /**
- * Responsible from driving the tank traks
+ * Responsible for driving the tank traks
  */
 UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class BATTLETANK_API UTankMovementComponent : public UNavMovementComponent
@@ -17,8 +16,12 @@ class BATTLETANK_API UTankMovementComponent : public UNavMovementComponent
 public:
 	UFUNCTION(Blueprintcallable, Category = Setup)
 	void Initialize(UTankTrack* LeftTrackToSet, UTankTrack* RightTrackToSet);
+
 	UFUNCTION(Blueprintcallable, Category = Input)
 	void IntendMoveForward(float Throw);
+
+	UFUNCTION(Blueprintcallable, Category = Input)
+	void IntendTurnRight(float Throw);
 
 private:
 	UTankTrack* LeftTrack = nullptr;
