@@ -5,8 +5,7 @@
 #include "Projectile.generated.h"
 
 UCLASS()
-class BATTLETANK_API AProjectile : public AActor
-{
+class BATTLETANK_API AProjectile : public AActor {
 	GENERATED_BODY()
 	
 public:	

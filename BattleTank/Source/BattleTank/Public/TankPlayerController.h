@@ -9,25 +9,26 @@ class ATank;
 class UTankTankAimingComponent;
 
 UCLASS()
-class BATTLETANK_API ATankPlayerController : public APlayerController
-{
+class BATTLETANK_API ATankPlayerController : public APlayerController {
 	GENERATED_BODY()
 	
 private:
 	UPROPERTY(EditAnywhere)
-		float CrosshairXLocation = 0.5f;
+	float CrosshairXLocation = 0.5f;
 	UPROPERTY(EditAnywhere)
-		float CrosshairYLocation = 0.333f;
+	float CrosshairYLocation = 0.333f;
 	UPROPERTY(EditAnywhere)
-		float LineTraceRange = 1000000.0f;
+	float LineTraceRange = 1000000.0f;
 
-	ATank* GetControlledTank() const;
-	virtual void BeginPlay() override;
-	virtual void Tick(float DeltaTime) override;
-	void AimTowardsCrosshair();
 	bool GetSightRayHitLocation(FVector& HitLocation) const;
 	bool GetLookDirection(FVector2D ScreenLocation, FVector& LookDirection) const;
 	bool GetLookVectorHitLocation(FVector LookDirection, FVector& HitLocation) const;
 
-public:
+	void AimTowardsCrosshair();
+	virtual void BeginPlay() override;
+	virtual void Tick(float DeltaTime) override;
+
+protected:
+	UFUNCTION(BlueprintCallable, Category = "Setup")
+	ATank* GetControlledTank() const;
 };

@@ -9,24 +9,24 @@
 ATank::ATank() {
 	PrimaryActorTick.bCanEverTick = false;
 	// TankMovementComponent = CreateDefaultSubobject<UTankMovementComponent>(FName("MovementComponent"));
-	TankAimingComponenet = CreateDefaultSubobject<UTankAimingComponent>(FName("AimingComponent"));
+	// TankAimingComponenet = CreateDefaultSubobject<UTankAimingComponent>(FName("AimingComponent"));
 }
 // Called when the game starts or when spawned
 void ATank::BeginPlay() {Super::BeginPlay();}
 
 // Called to bind functionality to input
-void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) {
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
-}
+//void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) {
+//	Super::SetupPlayerInputComponent(PlayerInputComponent);
+//}
 
-void ATank::SetTurretReference(UTankTurret* TurretToSet) {
-	TankAimingComponenet->SetTurretReference(TurretToSet);
-}
+//void ATank::SetTurretReference(UTankTurret* TurretToSet) {
+//	TankAimingComponenet->SetTurretReference(TurretToSet);
+//}
 
-void ATank::SetBarrelReference(UTankBarrel* BarrelToSet) {
-	TankAimingComponenet->SetBarrelReference(BarrelToSet);
-	Barrel = BarrelToSet;
-}
+//void ATank::SetBarrelReference(UTankBarrel* BarrelToSet) {
+//	TankAimingComponenet->SetBarrelReference(BarrelToSet);
+//	Barrel = BarrelToSet;
+//}
 
 void ATank::AimAt(FVector HitLocation) {
 	TankAimingComponenet->AimAt(HitLocation, LaunchSpeed);

@@ -11,16 +11,15 @@ class UTankMovementComponent;
 class UTankAimingComponent;
 
 UCLASS()
-class BATTLETANK_API ATank : public APawn
-{
+class BATTLETANK_API ATank : public APawn {
 	GENERATED_BODY()
 
 public:
-	UFUNCTION(BlueprintCallable, Category = Setup)
-	void SetTurretReference(UTankTurret* TurretToSet);
-	UFUNCTION(BlueprintCallable, Category = Setup)
-	void SetBarrelReference(UTankBarrel* BarrelToSet);
-	UFUNCTION(BlueprintCallable, Category = Firing)
+	//UFUNCTION(BlueprintCallable, Category = Setup)
+	//void SetTurretReference(UTankTurret* TurretToSet);
+	//UFUNCTION(BlueprintCallable, Category = Setup)
+	//void SetBarrelReference(UTankBarrel* BarrelToSet);
+	UFUNCTION(BlueprintCallable, Category = "Firing")
 	void Fire();
 
 	void AimAt(FVector HitLocation);
@@ -30,20 +29,21 @@ protected:
 	virtual void BeginPlay() override;
 	UPROPERTY(BlueprintReadOnly)
 	UTankMovementComponent* TankMovementComponent = nullptr;
+	UPROPERTY(BlueprintReadOnly)
 	UTankAimingComponent* TankAimingComponenet = nullptr;
 
 private:
 	ATank();
-	UPROPERTY(EditDefaultsOnly, Category = Firing)
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	float LaunchSpeed = 6000;
-	UPROPERTY(EditDefaultsOnly, Category = Firing)
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	float ReloadTimeInSeconds = 3;
-	UPROPERTY(EditDefaultsOnly, Category = Firing)
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	double LastFireTime = 0;
-	UPROPERTY(EditDefaultsOnly, Category = Setup)
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 	TSubclassOf<AProjectile> ProjectileBlueprint;
 	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	//virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	// Local barrel reference for projectile
-	UTankBarrel* Barrel = nullptr;
+	UTankBarrel* Barrel = nullptr; // to do remove
 };

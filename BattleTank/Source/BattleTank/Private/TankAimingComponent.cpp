@@ -7,32 +7,34 @@
 
 // Sets default values for this component's properties
 UTankAimingComponent::UTankAimingComponent() {
+	bWantsBeginPlay = true;
 	PrimaryComponentTick.bCanEverTick = false;
 }
 
-void UTankAimingComponent::SetTurretReference(UTankTurret* TurretToSet) {
-	if (!TurretToSet) { return; }
-	Turret = TurretToSet;
-}
+//void UTankAimingComponent::SetTurretReference(UTankTurret* TurretToSet) {
+//	if (!TurretToSet) { return; }
+//	Turret = TurretToSet;
+//}
 
-void UTankAimingComponent::SetBarrelReference(UTankBarrel* BarrelToSet) {
-	if (!BarrelToSet) { return; }
+//void UTankAimingComponent::SetBarrelReference(UTankBarrel* BarrelToSet) {
+//	if (!BarrelToSet) { return; }
+//	Barrel = BarrelToSet;
+//}
+
+void UTankAimingComponent::Initialize(UTankTurret* TurretToSet, UTankBarrel* BarrelToSet) {
+	Turret = TurretToSet;
 	Barrel = BarrelToSet;
 }
 
 // Called when the game starts
-void UTankAimingComponent::BeginPlay()
-{
-	Super::BeginPlay();
-}
+void UTankAimingComponent::BeginPlay() {Super::BeginPlay();}
 // Called every frame
-void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
-{
-	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-}
+//void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+//{
+//	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+//}
 
-void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
-{
+void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed) {
 	if (!Barrel) { return; }
 	FVector OutLaunchVelocity;
 	FVector StartLocation = Barrel->GetSocketLocation(FName("Projectile"));
@@ -47,21 +49,19 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 		0,
 		ESuggestProjVelocityTraceOption::DoNotTrace
 		);
-	if (bHaveAimSolution)
-	{
+	if (bHaveAimSolution) {
 		auto AimDirection = OutLaunchVelocity.GetSafeNormal();
 		//auto TankName = GetOwner()->GetName();
 		//UE_LOG(LogTemp, Warning, TEXT("%s Aiming at %s"), *TankName, *AimDirection.ToString());
 		MoveBarrelTowards(AimDirection);
 	}
-	else
-	{
+	else {
 		// No aim solution found
 	}
 }
 
-void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
-{
+void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection) {
+	if (!Barrel || !Turret) {return;}
 	auto BarrelRotator = Barrel->GetForwardVector().Rotation();
 	auto AimAsRotator = AimDirection.Rotation();
 	auto DeltaRotator = AimAsRotator - BarrelRotator;
