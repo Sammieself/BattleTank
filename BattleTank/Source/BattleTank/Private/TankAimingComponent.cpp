@@ -1,9 +1,9 @@
 // Hello my doggies.
 #include "TankAimingComponent.h"
+#include "Projectile.h"
 #include "BattleTank.h"
 #include "TankTurret.h"
 #include "TankBarrel.h"
-#include "Projectile.h"
 #include "Kismet/GameplayStatics.h"
 
 // Sets default values for this component's properties
@@ -23,13 +23,24 @@ void UTankAimingComponent::Initialize(UTankTurret* TurretToSet, UTankBarrel* Bar
 }
 
 void UTankAimingComponent::TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) {
-	if ((FPlatformTime::Seconds() - LastFireTime) < ReloadTimeInSeconds) {
+	if (RoundsLeft <= 0) {
+		FiringState = EFiringState::OutOfAmmo;
+	}
+	else if ((FPlatformTime::Seconds() - LastFireTime) < ReloadTimeInSeconds) {
 		FiringState = EFiringState::Reloading;
 	} else if (IsBarrelMoving()) {
 		FiringState = EFiringState::Aiming;
 	} else {
 		FiringState = EFiringState::Locked;
 	}
+}
+
+int UTankAimingComponent::GetRoundsLeft() const {
+	return RoundsLeft;
+}
+
+EFiringState UTankAimingComponent::GetFiringState() const {
+	return FiringState;
 }
 
 bool UTankAimingComponent::IsBarrelMoving() {
@@ -84,8 +95,8 @@ void UTankAimingComponent::Fire() {
 			Barrel->GetSocketLocation(FName("Projectile")),
 			Barrel->GetSocketRotation(FName("Projectile"))
 			);
-
 		Projectile->LaunchProjectile(LaunchSpeed);
 		LastFireTime = FPlatformTime::Seconds();
+		RoundsLeft--;
 	}
 }
