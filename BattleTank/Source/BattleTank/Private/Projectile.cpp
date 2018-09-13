@@ -21,8 +21,8 @@ AProjectile::AProjectile() {
 	ImpactBlast->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 	ImpactBlast->bAutoActivate = false;
 
-	//ExplosionForce = CreateDefaultSubobject<URadialForceComponent>(FName("Explosion Force"));
-	//ExplosionForce->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
+	ExplosionForce = CreateDefaultSubobject<URadialForceComponent>(FName("Explosion Force"));
+	ExplosionForce->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 }
 
 void AProjectile::BeginPlay() {
@@ -38,19 +38,19 @@ void AProjectile::LaunchProjectile(float Speed) {
 void AProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit) {
 	LaunchBlast->Deactivate();
 	ImpactBlast->Activate();
-	//ExplosionForce->FireImpulse();
+	ExplosionForce->FireImpulse();
 
 	SetRootComponent(ImpactBlast);
 	CollisionMesh->DestroyComponent();
 
-	//UGameplayStatics::ApplyRadialDamage(
-	//	this,
-	//	ProjectileDamage,
-	//	GetActorLocation(),
-	//	ExplosionForce->Radius, // for consistancy
-	//	UDamageType::StaticClass(),
-	//	TArray<AActor*>() // damage all actors
-	//);
+	UGameplayStatics::ApplyRadialDamage(
+		this,
+		ProjectileDamage,
+		GetActorLocation(),
+		ExplosionForce->Radius, // for consistency
+		UDamageType::StaticClass(),
+		TArray<AActor*>() // damage all actors
+	);
 
 	FTimerHandle Timer;
 	GetWorld()->GetTimerManager().SetTimer(Timer, this, &AProjectile::OnTimerExpire, DestroyDelay, false);
