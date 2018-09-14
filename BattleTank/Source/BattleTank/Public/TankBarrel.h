@@ -1,6 +1,5 @@
 // Hello my doggies.
 #pragma once
-//#include "CoreMinimal.h"
 #include "Components/StaticMeshComponent.h"
 #include "TankBarrel.generated.h"
 
@@ -15,7 +14,7 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Setup")
 		float MaxDegreesPerSecond = 10;
 	UPROPERTY(EditAnywhere, Category = "Setup")
-		float MaxDegreesElevation = 35;
+		float MaxDegreesElevation = 30;
 	UPROPERTY(EditAnywhere, Category = "Setup")
 		float MinDegreesElevation = 0;
 };

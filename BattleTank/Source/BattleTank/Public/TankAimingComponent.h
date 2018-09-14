@@ -38,21 +38,20 @@ protected:
 	EFiringState FiringState = EFiringState::Reloading;
 
 private:
-	UPROPERTY(EditDefaultsOnly, Category = "Setup")
-	TSubclassOf<AProjectile> ProjectileBlueprint;
-	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-	float LaunchSpeed = 7000;
-	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-	float ReloadTimeInSeconds = 3;
-	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-	int32 RoundsLeft = 3;
-
-	double LastFireTime = 0;
-	FVector AimDirection;
-
 	UTankAimingComponent();
 	UTankTurret* Turret = nullptr;
 	UTankBarrel* Barrel = nullptr;
+	double LastFireTime = 0;
+	FVector AimDirection;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
+	TSubclassOf<AProjectile> ProjectileBlueprint;
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	float LaunchSpeed = 5000;
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	float ReloadTimeInSeconds = 2;
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	int32 RoundsLeft = 20;
 
 	virtual void BeginPlay() override;
 	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;

@@ -23,7 +23,13 @@ protected:
 
 private:
 	UFUNCTION()
-		void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
+		void OnHit(
+			UPrimitiveComponent* HitComponent,
+			AActor* OtherActor,
+			UPrimitiveComponent* OtherComponent,
+			FVector NormalImpulse,
+			const FHitResult& Hit
+		);
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 		float DestroyDelay = 10.f;
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")

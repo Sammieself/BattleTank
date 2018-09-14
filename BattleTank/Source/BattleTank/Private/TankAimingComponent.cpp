@@ -8,11 +8,11 @@
 
 // Sets default values for this component's properties
 UTankAimingComponent::UTankAimingComponent() {
-	bWantsBeginPlay = true;
 	PrimaryComponentTick.bCanEverTick = true;
 }
 
 void UTankAimingComponent::BeginPlay() {
+	Super::BeginPlay();
 	// first fire after initial reload
 	LastFireTime = FPlatformTime::Seconds();
 }
@@ -70,10 +70,10 @@ void UTankAimingComponent::AimAt(FVector HitLocation) {
 	}
 }
 
-void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection) {
+void UTankAimingComponent::MoveBarrelTowards(FVector TargetAimDirection) {
 	if (!ensure(Barrel && Turret)) {return;}
 	auto BarrelRotator = Barrel->GetForwardVector().Rotation();
-	auto AimAsRotator = AimDirection.Rotation();
+	auto AimAsRotator = TargetAimDirection.Rotation();
 	auto DeltaRotator = AimAsRotator - BarrelRotator;
 	// Always yaw the shortest way
 	Barrel->Elevate(DeltaRotator.Pitch);
