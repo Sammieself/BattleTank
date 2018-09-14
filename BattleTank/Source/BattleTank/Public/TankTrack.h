@@ -14,16 +14,11 @@ public:
 	void SetThrottle(float Throttle);
 	// Max Force per track, in Newtons
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
-	float TrackDrivingMaxForce = 400000; // 400000
+	float TrackDrivingMaxForce = 2000000; // 400000
 
 private:
 	UTankTrack();
-	// virtual void BeginPlay() override;
-	// void ApplySidewaysForce();
-
-	// UFUNCTION()
-	// void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
+PrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
 	TArray<class ASprungWheel*> GetWheels() const;
 	void DriveTrack(float CurrentThrottle);
-	// float CurrentThrottle = 0;
 };
