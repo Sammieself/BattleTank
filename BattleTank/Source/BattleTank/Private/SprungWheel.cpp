@@ -53,6 +53,10 @@ void ASprungWheel::AddDrivingForce(float ForceMagnitude) {
 	TotalForceMagnitudeThisFrame += ForceMagnitude;
 }
 
+void ASprungWheel::ApplyForce() {
+	Wheel->AddForce(Axle->GetForwardVector() * TotalForceMagnitudeThisFrame);
+}
+
 void ASprungWheel::OnHit(
 	UPrimitiveComponent* HitComponent,
 	AActor* OtherActor,
@@ -63,8 +67,4 @@ void ASprungWheel::OnHit(
 	UE_LOG(LogTemp, Warning, TEXT("OnHit %f"), GetWorld()->GetTimeSeconds());
 
 	ApplyForce();
-}
-
-void ASprungWheel::ApplyForce() {
-	Wheel->AddForce(Axle->GetForwardVector() * TotalForceMagnitudeThisFrame);
 }
